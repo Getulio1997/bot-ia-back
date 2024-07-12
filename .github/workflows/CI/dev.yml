@@ -1,0 +1,63 @@
+name: Desenvolvimento
+
+on:
+  push:
+    branches:
+      - main    
+  pull_request:
+    branches:
+      - main    
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.11] 
+
+    steps:
+    - name: Verifica Códigos
+      uses: actions/checkout@v2
+
+    - name: Atualiza Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Instala Dependências
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Verifica Erros
+      run: |
+        pytest
+
+  run-application:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    strategy:
+      matrix:
+        python-version: [3.11] 
+
+    steps:
+    - name: Verifica Códigos
+      uses: actions/checkout@v2
+
+    - name: Atualiza Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Instala Dependências
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Roda Aplicação
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        python api/senhaApi.py
