@@ -61,3 +61,7 @@ jobs:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         python api/senhaApi.py
+
+    - name: Debug OpenAI API Key
+      run: |
+        echo "OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}"
