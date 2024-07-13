@@ -13,10 +13,6 @@ jobs:
     name: Testes
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        python-version: [3.11.8] 
-
     steps:
     - name: Verifica Códigos
       uses: actions/checkout@v2
@@ -24,7 +20,7 @@ jobs:
     - name: Atualiza Python
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.11.8
 
     - name: Instala Dependências
       run: |
@@ -42,6 +38,8 @@ jobs:
 
     - name: Atualiza Python
       uses: actions/setup-python@v2
+      with:
+        python-version: 3.11.8
 
     - name: Instala Dependências
       run: |
