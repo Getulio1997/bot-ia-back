@@ -23,6 +23,8 @@ jobs:
 
     - name: Atualiza Python
       uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
     - name: Instala Dependências
       run: |
@@ -33,10 +35,6 @@ jobs:
     name: Desenvolvimento
     runs-on: ubuntu-latest
     needs: build
-
-    strategy:
-      matrix:
-        python-version: [3.11.8] 
 
     steps:
     - name: Verifica Códigos
