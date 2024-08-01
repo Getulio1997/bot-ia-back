@@ -50,7 +50,7 @@ jobs:
         python api/senhaApi.py
 
   deploy:
-    name: Deploy no Render
+    name: Produção
     runs-on: ubuntu-latest
     needs: run-application
 
@@ -58,7 +58,7 @@ jobs:
     - name: Verifica Códigos
       uses: actions/checkout@v2
 
-    - name: Deploy no Render
+    - name: Produção
       env:
         RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
       run: |
