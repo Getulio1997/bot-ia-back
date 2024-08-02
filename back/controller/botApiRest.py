@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
+from fastapi.responses import RedirectResponse
 from back.controller.chatbot import enviar_mensagem
 from back.model.mensagem import Mensagem
 from config.cors import add_cors
@@ -16,6 +17,10 @@ def api_analisa_texto(mensagem: Mensagem):
         return {"resposta": resposta_modelo}
     except HTTPException as e:
         raise e
+
+@app.get("/")
+def root():
+    return RedirectResponse(url="/docs")
 
 class LimitRequestSizeMiddleware(BaseHTTPMiddleware):
     def __init__(self, app, max_size: int = 200 * 1024 * 1024):
