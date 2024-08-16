@@ -1,3 +1,4 @@
+import re
 from fastapi import FastAPI, HTTPException
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
@@ -5,18 +6,23 @@ from fastapi.responses import RedirectResponse
 from back.controller.chatbot import enviar_mensagem
 from back.model.mensagem import Mensagem
 from config.cors import add_cors
-import re
 
 app = FastAPI()
 
 add_cors(app)
 
 def validar_mensagem(mensagem: str) -> bool:
-    padroes_codigo = re.compile(r'(\bclass\b|\bfunction\b|\bif\b|\belse\b|\bfor\b|\bwhile\b|\bdo\b|\breturn\b|\bimport\b|\bexport\b|\bnew\b|\bthis\b|\btry\b|\bcatch\b|\bthrow\b|\bfinally\b|\bconst\b|\blet\b|\bvar\b|<\/?[a-z][^>]*>|[{[\]}();]|=>|\bconsole\.log\b|\btypeof\b|\binstanceof\b|\bnull\b|\bundefined\b|\bimport\b|\bexport\b|\btry\b|\bcatch\b|\bthrow\b)', re.IGNORECASE)
+    padroes_codigo = re.compile(
+        r'\b(class|function|if|else|for|while|do|return|import|export|new|this|try|catch|throw|finally|const|let|var)\b|'
+        r'<\/?[a-z][^>]*>|[{[\]}();]|=>|\bconsole\.log\b|\btypeof\b|\binstanceof\b|\bnull\b|\bundefined\b|'
+        r'\bimport\b|\bexport\b|[\w\.]+[;)]|function\s*\w+\s*\(|class\s*\w+\b|[\w\.]+\s*\(',
+        re.IGNORECASE
+    )
+    
     termos_contexto = re.compile(r'\b(código|programação|script|erro|debug)\b', re.IGNORECASE)
-    tem_formato_de_codigo = re.compile(r'\b(?:\w+\s*=\s*\w+|function\s*\w+\s*\(|class\s*\w+|[\w\.]+\()', re.IGNORECASE)
+    padrao_codigo_match = padroes_codigo.search(mensagem)
 
-    return (padroes_codigo.search(mensagem) or termos_contexto.search(mensagem)) and tem_formato_de_codigo.search(mensagem)
+    return padrao_codigo_match is not None
 
 @app.post("/analisa_texto")
 def api_analisa_texto(mensagem: Mensagem):
