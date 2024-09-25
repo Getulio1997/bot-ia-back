@@ -7,7 +7,11 @@ from back.controller.chatbot import enviar_mensagem
 from back.model.mensagem import Mensagem
 from config.cors import add_cors
 
-app = FastAPI()
+app = FastAPI(
+    title="AnalytiCode - back",
+    description="API para o bot AnalytiCode",
+    version="0.1.0"
+)
 
 add_cors(app)
 
