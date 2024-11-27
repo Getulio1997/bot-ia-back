@@ -1,4 +1,4 @@
-# AnalytiCode back <img src="/images/Python-logo-notext.svg.png" alt="Angular CLI" width="30" height="30">
+# AnalytiCode back <img src="/images/Python-logo-notext.svg.png" alt="Python" width="30" height="30">
 
 Este projeto foi gerado em python [Python](https://docs.python.org/pt-br/3/) versão 3.13.0.
 
