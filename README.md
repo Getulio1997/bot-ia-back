@@ -1,20 +1,19 @@
 # AnalytiCode back <img src="/images/Python-logo-notext.svg.png" alt="Python" width="30" height="30">
 
-Este projeto foi gerado em python [Python](https://docs.python.org/pt-br/3/) versão 3.13.0.
+Este projeto foi gerado em [Python](https://docs.python.org/pt-br/3/) versão 3.13.0.
 
-## É necessário instalar o python
 
-[Baixar Python](https://www.python.org/downloads/)
 
 ## Rodar o AnalytiCode back
 
-* Para rodar é necessário instalar o `python` 
-* Intalar o `FastAPI` que é uma biblioteca de integração com IAs 
-* Intalar o `uvicorn` que é a documentação para o back.
+* Instale o `python` [Clique para baixar](https://www.python.org/downloads/)
+* Instale o `FastAPI` que é uma biblioteca de integração com IAs 
 
 ``` bash
 pip install fastapi
 ```
+
+* Instale o `uvicorn` que é a documentação para o back.
 
 ``` bash
 pip install uvicorn
@@ -22,11 +21,12 @@ pip install uvicorn
 
 ## Servidor de desenvolvimento
 
-Execute o comando `uvicorn main:app --reload` para um servidor dev. Navegue até `http://localhost:8000/`.
+* Suba o servidor dev:
 
 ``` bash
 uvicorn main:app --reload
 ```
+* Navegue até `http://localhost:8000/`.
 
 ## Servidor de deploy
 
